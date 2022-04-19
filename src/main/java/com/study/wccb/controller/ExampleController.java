@@ -22,6 +22,10 @@ public class ExampleController {
 
     private final WebClient webClient;
 
+    @GetMapping(path = "/users/{name}")
+    public Mono<String> getName(@PathVariable String name) {
+        return Mono.just(name);
+    }
 
     @GetMapping("/{id}")
     public Mono<Post> getId(@PathVariable String id){
@@ -34,7 +38,7 @@ public class ExampleController {
                 .retrieve()
                 .bodyToMono(Post.class);
 
-        postMono.subscribe(System.out::println);
+        //postMono.subscribe(System.out::println);
         return postMono;
 
     }
@@ -51,7 +55,7 @@ public class ExampleController {
                 .retrieve()
                 .bodyToFlux(Post.class);
 
-        postFlux.subscribe(System.out::println);
+        //postFlux.subscribe(System.out::println);
         return postFlux;
     }
 }
